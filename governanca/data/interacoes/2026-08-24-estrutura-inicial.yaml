@@ -1,0 +1,24 @@
+id: ia:2026-08-24-estrutura-inicial
+kind: ia
+titulo: "Estrutura do repositório, esquema do grafo e os doze guias"
+criado_em: 2026-08-24
+aceito: parcial
+critica_humana: |
+  1. A revisão de literatura afirmou que "objetivo submodular implica curva
+     côncava". Não é teorema — submodularidade sustenta retornos decrescentes,
+     não concavidade exata da curva de valor ótimo em p. O G06 corrige.
+     #discordancia
+
+  2. Os números de dimensionamento da instância (|Q| entre 2.000 e 4.000,
+     |P_q| entre 20 e 60) foram apresentados com aparência de medição.
+     São chute de ordem de grandeza. A T22 existe justamente para medir.
+
+  3. Formulação e instância de Carvalho (2026), Ribeiro (2023), Brunelli (2023)
+     e Shin (2021) foram confirmadas só em metadado bibliográfico. Nenhuma pode
+     ser descrita no relatório antes de obtermos o PDF. Ver pendencia:P02.
+
+  4. O esquema tem 11 tipos de nó, mas a regra do próprio documento diz que nó
+     sem consulta é decoração — e `referencia` e `conclusao` ainda não têm
+     consulta escrita. Débito aberto: escrever ou cortar.
+arestas:
+  - {rel: ASSINADA_POR, dst: "pessoa:henri"}
