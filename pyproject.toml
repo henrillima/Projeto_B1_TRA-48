@@ -1,0 +1,21 @@
+[project]
+name = "governanca-b1"
+version = "0.1.0"
+description = "Ferramentas do banco de governança do Projeto B1 — TRA-48"
+requires-python = ">=3.11"
+
+# Só ferramentas de governança. A análise é em R (ver CLAUDE.md §4).
+dependencies = [
+    "pyyaml",       # leitura dos YAML da fonte de verdade
+    "jsonschema",   # validação contra schema/grafo.schema.json
+    "duckdb",       # o banco: grafo emulado em node/edge (decisao:D06)
+    "networkx",     # métricas e layout determinístico do site
+    "scipy",        # exigida pelo kamada_kawai_layout do networkx
+]
+
+[project.optional-dependencies]
+mcp = ["fastmcp"]   # servidor read-only, T01.4
+cli = ["typer"]     # a CLI gov, T01.3
+
+[tool.uv]
+package = false

@@ -1,0 +1,51 @@
+name: Validar o grafo
+
+# Guardião de integridade do grafo. Este job é o que deve ser marcado como
+# required check na proteção da branch main: um pull request que quebra uma
+# referência, cria um ciclo em BLOQUEIA ou deixa uma tarefa sem meta não é
+# mesclável. É isso que separa "banco de governança computável" de "pasta de
+# arquivos YAML".
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches-ignore: [main]   # em main quem valida é o pages.yml, antes do deploy
+
+permissions:
+  contents: read
+
+jobs:
+  validar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: astral-sh/setup-uv@v9
+        with:
+          enable-cache: true
+
+      - name: Schema e integridade
+        run: |
+          uv run --with pyyaml --with jsonschema \
+            python governanca/tools/validar.py \
+              governanca/data governanca/schema/grafo.schema.json
+
+      - name: O grafo compila
+        # Não basta o YAML validar: o build tem que passar também, senão o erro
+        # só aparece no deploy, depois do merge.
+        run: |
+          uv run --with pyyaml --with jsonschema --with duckdb \
+            python governanca/tools/build.py \
+              --src governanca/data \
+              --schema governanca/schema/grafo.schema.json \
+              --out /tmp/grafo.duckdb
+
+      - name: Nada de artefato commitado
+        # O banco e o site são artefatos de build (decisao:D07). Se algum
+        # aparecer rastreado no git, alguma coisa deu errado no .gitignore.
+        run: |
+          if git ls-files | grep -E '^(governanca/build/|_site/|_targets/)'; then
+            echo "::error::Artefato de build rastreado no git. Ver decisao:D07."
+            exit 1
+          fi

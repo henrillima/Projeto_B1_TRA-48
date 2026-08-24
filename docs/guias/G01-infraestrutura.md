@@ -67,7 +67,7 @@ gerar o que registrar.
 | `governanca/tools/validar.py` | **já escrito** | ponto de partida de T01.2 |
 | `docs/referencia/convencoes.md` | já escrito | §4.1 ids, §5 kanban, §7 YAML, §6.3 gitignore |
 | `decisao:D06`, `D07`, `D08`, `D09` | já registradas | as escolhas que este guia implementa |
-| Cytoscape.js, arquivo UMD `dist/cytoscape.umd.js` | vendorizar (ver §5.5) | desenho do grafo |
+| Cytoscape.js, arquivo UMD `dist/cytoscape.min.js` (428 KB) | vendorizar (ver §5.5) | desenho do grafo |
 
 **Não** são insumos: nenhum CDN, nenhum serviço externo, nenhum banco hospedado. Tudo o que o
 site precisa para funcionar tem que estar dentro do repositório. Site que depende de CDN quebra
@@ -1068,7 +1068,7 @@ import duckdb
 import networkx as nx
 
 SEED = 20260824          # a mesma do _targets.R; layout determinístico entre builds
-VENDOR = Path(__file__).parent / "vendor" / "cytoscape.umd.js"
+VENDOR = Path(__file__).parent / "vendor" / "cytoscape.min.js"
 
 CORES = {"meta": "#7c3aed", "tarefa": "#2563eb", "decisao": "#059669",
          "pendencia": "#dc2626", "fonte": "#d97706", "referencia": "#a16207",
@@ -1188,8 +1188,8 @@ if __name__ == "__main__":
 
 O `index.html` embute o Cytoscape inteiro, não o carrega de CDN. Motivo: o site tem que abrir
 offline, e uma dependência de rede é uma dependência que falha na hora da apresentação. Baixe o
-pacote `cytoscape` do npm uma vez, copie `dist/cytoscape.umd.js` para
-`governanca/tools/vendor/cytoscape.umd.js` e **commite o arquivo** — ele é dependência, não
+pacote `cytoscape` do npm uma vez, copie `dist/cytoscape.min.js` para
+`governanca/tools/vendor/cytoscape.min.js` e **commite o arquivo** — ele é dependência, não
 artefato de build, e a distinção é o critério do `.gitignore`. Registre um nó `arquivo:` para
 ele, com o `sha256`, e a licença (MIT) no `README`.
 
@@ -1385,11 +1385,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0        # a métrica de cadência lê `git log`; raso mentiria
 
-      - uses: astral-sh/setup-uv@v5
+      - uses: astral-sh/setup-uv@v9
         with:
           enable-cache: true
 
@@ -1411,7 +1411,7 @@ jobs:
             --db governanca/build/grafo.duckdb --out _site/
 
       - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: _site/
 
@@ -1423,7 +1423,7 @@ jobs:
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - id: deploy
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
 ```
 
 #### O workflow de PR: valida e não publica
@@ -1451,11 +1451,11 @@ jobs:
   grafo:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0      # checar_notas_append_only compara com origin/main
 
-      - uses: astral-sh/setup-uv@v5
+      - uses: astral-sh/setup-uv@v9
         with:
           enable-cache: true
 
@@ -1482,10 +1482,11 @@ jobs:
 Depois de o workflow rodar uma vez: Settings → Branches → regra em `main` → **Require status
 checks to pass** → marque `grafo`. Antes da primeira execução o check nem aparece na lista.
 
-> **[A CONFIRMAR]** As majors das actions (`configure-pages@v5`, `upload-pages-artifact@v3`,
-> `deploy-pages@v4`, `setup-uv@v5`) são as conhecidas na escrita deste guia. Confira a major
-> corrente de cada uma antes de commitar — action desatualizada falha com aviso de depreciação
-> que ninguém lê até o dia da entrega. Abra uma pendência se não der para confirmar hoje.
+> **Majors conferidas em 24/08/2026**, na página de releases de cada action:
+> `checkout@v6`, `setup-uv@v9`, `configure-pages@v5`, `upload-pages-artifact@v5`,
+> `deploy-pages@v5`. São essas que estão nos workflows commitados. Reconfira antes de
+> qualquer alteração no CI — action desatualizada falha com aviso de depreciação que ninguém
+> lê até o dia da entrega.
 
 ---
 

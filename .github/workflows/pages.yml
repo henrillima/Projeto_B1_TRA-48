@@ -1,0 +1,81 @@
+name: Publicar o site de governança
+
+# Deploy por ARTEFATO, não pela branch gh-pages. O motivo é específico deste
+# projeto: deploy por branch commitaria a saída do build no histórico, e a
+# cadência de commits é métrica auditada — inflar isso com ruído de build
+# corromperia exatamente o que se quer medir com honestidade.
+#
+# Pré-requisito manual, uma vez só:
+#   Settings -> Pages -> Build and deployment -> Source = "GitHub Actions"
+# Sem isso o job de deploy falha com erro de "Pages not enabled".
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# O mínimo que o deploy por OIDC exige. Nenhum token de escrita no repositório.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Um deploy por vez, e não cancela o que está em andamento: dois pushes
+# seguidos cancelando um ao outro deixariam o site em estado indefinido.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          # fetch-depth: 0 é obrigatório aqui. O site publica a cadência de
+          # commits por semana, lida do git log — com histórico raso o gráfico
+          # sai truncado e a métrica publicada mente para menos.
+          fetch-depth: 0
+
+      - name: Instalar uv
+        uses: astral-sh/setup-uv@v9
+        with:
+          enable-cache: true
+
+      - name: Validar o grafo
+        # Roda antes de qualquer coisa. Compilar um grafo quebrado produziria um
+        # site que responde errado com cara de que respondeu certo.
+        run: |
+          uv run --with pyyaml --with jsonschema \
+            python governanca/tools/validar.py \
+              governanca/data governanca/schema/grafo.schema.json
+
+      - name: Compilar YAML -> DuckDB
+        run: |
+          uv run --with pyyaml --with jsonschema --with duckdb \
+            python governanca/tools/build.py \
+              --src governanca/data \
+              --schema governanca/schema/grafo.schema.json \
+              --out governanca/build/grafo.duckdb
+
+      - name: Gerar o site
+        run: |
+          uv run --with duckdb --with networkx --with scipy \
+            python governanca/tools/site.py \
+              --db governanca/build/grafo.duckdb --out _site/ --repo .
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5
