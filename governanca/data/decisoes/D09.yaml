@@ -1,0 +1,17 @@
+id: decisao:D09
+kind: decisao
+titulo: "Não usar GraphRAG; recuperação por consulta exata sobre o grafo curado"
+status: vigente
+criado_em: 2026-08-24
+descricao: |
+  GraphRAG é uma técnica para CONSTRUIR um grafo a partir de texto não estruturado, com extração de entidades por LLM. Nós não temos esse problema: escrevemos o grafo à mão, com tipos explícitos e ids estáveis. Rodar GraphRAG sobre ele seria degradar informação estruturada em informação inferida. Em vez disso: tools semânticas no MCP sobre SQL recursivo, mais um resumo textual do grafo gerado no build, mais busca full-text nos campos de texto.
+alternativas_descartadas:
+  - opcao: "GraphRAG da Microsoft"
+    por_que_nao: "Escala errada por três ordens de grandeza — foi projetado para corpora que não cabem em contexto, e nosso grafo inteiro cabe. Indexação por LLM a cada mudança é insustentável em custo e introduz não-determinismo no build."
+  - opcao: "RAG vetorial sobre os registros"
+    por_que_nao: "Recuperação probabilística onde a exata é possível é regressão, não upgrade. 'Quais pendências bloqueiam a meta M2' tem uma resposta correta, obtida por travessia determinística; uma resposta com 88% de recall é pior que inútil em governança, porque parece confiável."
+  - opcao: "Índice vetorial híbrido leve"
+    por_que_nao: "Descartado por ora, mas revisitável: se o corpus de texto livre crescer muito (transcrições longas, muitos PDFs), vale um índice vetorial sobre os textos, mantendo o grafo curado como camada estrutural separada."
+arestas:
+  - {rel: DECIDE_SOBRE, dst: "meta:M4"}
+  - {rel: ASSINADA_POR, dst: "pessoa:henri"}

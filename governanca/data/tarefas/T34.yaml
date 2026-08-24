@@ -1,0 +1,16 @@
+id: tarefa:T34
+kind: tarefa
+titulo: "Implementar UMA extensão: massa crítica ou equidade"
+status: backlog
+prazo: 2026-09-19
+prioridade: media
+estimativa_h: 8
+criado_em: 2026-08-24
+arestas:
+  - {rel: REALIZA, dst: "meta:M3"}
+  - {rel: ATRIBUIDA_A, dst: "pessoa:antonio"}
+  - {rel: DEPENDE_DE, dst: "tarefa:T33"}
+notas:
+  - data: 2026-08-24
+    autor: antonio
+    texto: "Uma, não duas. Extensão pela metade vale menos que ausência justificada."

@@ -1,0 +1,17 @@
+id: tarefa:T22
+kind: tarefa
+titulo: "Pré-processar e MEDIR o tamanho real da instância"
+status: backlog
+prazo: 2026-09-05
+prioridade: alta
+estimativa_h: 6
+criado_em: 2026-08-24
+arestas:
+  - {rel: REALIZA, dst: "meta:M2"}
+  - {rel: ATRIBUIDA_A, dst: "pessoa:henri"}
+  - {rel: DEPENDE_DE, dst: "tarefa:T21"}
+  - {rel: DEPENDE_DE, dst: "tarefa:T13"}
+notas:
+  - data: 2026-08-24
+    autor: henri
+    texto: "Medir |Q| e a soma de |P_q| ANTES de escrever o modelo. As estimativas atuais são ordem de grandeza, não medição."

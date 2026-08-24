@@ -1,0 +1,16 @@
+id: tarefa:T23
+kind: tarefa
+titulo: "Implementar o modelo em ompr e resolver com HiGHS"
+status: backlog
+prazo: 2026-09-08
+prioridade: alta
+estimativa_h: 10
+criado_em: 2026-08-24
+arestas:
+  - {rel: REALIZA, dst: "meta:M2"}
+  - {rel: ATRIBUIDA_A, dst: "pessoa:henri"}
+  - {rel: DEPENDE_DE, dst: "tarefa:T22"}
+notas:
+  - data: 2026-08-24
+    autor: henri
+    texto: "Se ompr engasgar acima de 1e5 variáveis, montar a matriz com Matrix::sparseMatrix e chamar highs_solve direto."

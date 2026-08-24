@@ -1,0 +1,19 @@
+id: decisao:D03
+kind: decisao
+titulo: "Estimar a demanda capturável por um filtro de quatro camadas"
+status: vigente
+criado_em: 2026-08-24
+descricao: |
+  Considerar capturável por UAM a viagem que satisfaça simultaneamente: distância em linha reta maior ou igual a 15 km; duração terrestre declarada na OD maior ou igual a 45-60 minutos; motivo trabalho ou negócios; e faixas superiores de renda. Os quatro limiares entram no código como parâmetros, nunca como constantes, porque viram a análise de sensibilidade da semana 3. A literatura converge para uma fatia pequena e muito sensível à tarifa: Wu e Zhang (2021) filtram por 10 milhas e 30 minutos sobre 266.734 viagens candidatas e chegam a 532 viagens efetivamente UAM, cerca de 0,20% de adoção.
+alternativas_descartadas:
+  - opcao: "Toda a matriz OD"
+    por_que_nao: "Um modelo de localização construído sobre demanda inventada é um exercício de aritmética, não engenharia (§3.1)."
+  - opcao: "Só filtro de distância"
+    por_que_nao: "Captura viagens periféricas longas de baixa renda que não são o mercado real da UAM, e infla o resultado."
+  - opcao: "Logit calibrado de escolha modal"
+    por_que_nao: "Correto em tese, mas não existe logit calibrado para UAM no Brasil. Transplantar coeficientes de Munique ou da Califórnia introduziria parâmetro sem procedência brasileira. Fica como extensão opcional e como cenário de sensibilidade."
+  - opcao: "Renda pelo Censo por setor censitário"
+    por_que_nao: "Mais fino espacialmente, mas exige compatibilização com a geografia das zonas OD, e o Censo 2022 tem rendimento limitado frente ao de 2010. A renda da própria OD já está na geografia certa."
+arestas:
+  - {rel: DECIDE_SOBRE, dst: "meta:M1"}
+  - {rel: ASSINADA_POR, dst: "pessoa:pedro"}

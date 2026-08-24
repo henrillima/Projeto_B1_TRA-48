@@ -1,0 +1,17 @@
+id: decisao:D02
+kind: decisao
+titulo: "Usar os microdados da OD 2017, calibrados pelo nível da OD 2023"
+status: vigente
+criado_em: 2026-08-24
+descricao: |
+  A OD 2017 é a edição mais recente com microdados publicados: .sav e .dbf, mais shapefiles das zonas e o layout de variáveis, dentro do OD-2017.zip. A OD 2023 publicou até agora relatório-síntese e anexos, sem banco desagregado identificado. Como a OD 2023 registra queda real de 42 para 35,6 milhões de viagens diárias, usar 2017 sem correção superestimaria a demanda.
+alternativas_descartadas:
+  - opcao: "OD 2023 pura"
+    por_que_nao: "Sem microdados não há matriz OD por par de zonas com atributos de renda, motivo e duração, que é o insumo do filtro de captura."
+  - opcao: "Ignorar a OD 2023"
+    por_que_nao: "Desonesto quanto à mudança estrutural pós-pandemia: a divisão modal inverteu, com o individual motorizado superando o coletivo pela primeira vez."
+  - opcao: "Dados de ride-hailing ou de celular"
+    por_que_nao: "Não são públicos nem verificáveis por terceiros, e o enunciado exige fonte verificável (§3.2)."
+arestas:
+  - {rel: DECIDE_SOBRE, dst: "meta:M1"}
+  - {rel: ASSINADA_POR, dst: "pessoa:pedro"}

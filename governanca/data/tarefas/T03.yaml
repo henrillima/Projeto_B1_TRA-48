@@ -1,0 +1,16 @@
+id: tarefa:T03
+kind: tarefa
+titulo: "Preparar e conduzir o 1º encontro de acompanhamento"
+status: backlog
+prazo: 2026-08-26
+prioridade: alta
+estimativa_h: 2
+criado_em: 2026-08-24
+arestas:
+  - {rel: REALIZA, dst: "meta:M4"}
+  - {rel: ATRIBUIDA_A, dst: "pessoa:antonio"}
+  - {rel: DEPENDE_DE, dst: "tarefa:T02"}
+notas:
+  - data: 2026-08-24
+    autor: antonio
+    texto: "O ponto de partida do encontro é o site, não uma apresentação. Se o banco estiver vivo, não há nada a preparar."

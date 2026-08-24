@@ -1,0 +1,16 @@
+id: tarefa:T12
+kind: tarefa
+titulo: "Definir e aplicar o filtro de demanda capturável"
+status: backlog
+prazo: 2026-09-02
+prioridade: alta
+estimativa_h: 8
+criado_em: 2026-08-24
+arestas:
+  - {rel: REALIZA, dst: "meta:M1"}
+  - {rel: ATRIBUIDA_A, dst: "pessoa:pedro"}
+  - {rel: DEPENDE_DE, dst: "tarefa:T11"}
+notas:
+  - data: 2026-08-24
+    autor: pedro
+    texto: "Quatro camadas: distância, duração terrestre, motivo, renda. Os limiares entram como parâmetros, não constantes — viram a sensibilidade da S3."

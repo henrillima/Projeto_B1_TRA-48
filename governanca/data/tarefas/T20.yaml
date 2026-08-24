@@ -1,0 +1,10 @@
+id: tarefa:T20
+kind: tarefa
+titulo: "Construir o conjunto de candidatos a vertiporto"
+status: backlog
+prazo: 2026-09-02
+prioridade: alta
+criado_em: 2026-08-24
+arestas:
+  - {rel: REALIZA, dst: "meta:M2"}
+  - {rel: ATRIBUIDA_A, dst: "pessoa:antonio"}

@@ -1,0 +1,7 @@
+id: meta:M2
+kind: meta
+titulo: "Formular e resolver um MILP de localização que enfrente o que o problema tem de essencial"
+status: aberta
+criado_em: 2026-08-24
+descricao: |
+  Um modelo de programação matemática que trate a viagem porta a porta, a interdependência entre localizações e a massa crítica de rede — sem sair do MILP exato, para preservar relaxação linear e leitura de duais.

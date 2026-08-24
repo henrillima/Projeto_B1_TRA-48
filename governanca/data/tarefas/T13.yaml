@@ -1,0 +1,11 @@
+id: tarefa:T13
+kind: tarefa
+titulo: "Construir a matriz de tempos terrestres entre macrozonas"
+status: backlog
+prazo: 2026-09-02
+prioridade: alta
+criado_em: 2026-08-24
+arestas:
+  - {rel: REALIZA, dst: "meta:M1"}
+  - {rel: ATRIBUIDA_A, dst: "pessoa:antonio"}
+  - {rel: DEPENDE_DE, dst: "tarefa:T11"}

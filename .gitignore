@@ -1,0 +1,89 @@
+# ---------------------------------------------------------------------------
+# Artefatos de build — NUNCA commitar.
+# A única fonte de verdade é o texto em governanca/data/. O banco é artefato,
+# como um .o. Commit de binário produz diff ilegível, merge impossível e ruído
+# não determinístico — e ruído binário destrói exatamente a auditabilidade que
+# a métrica de cadência pretende medir. Ver decisao:D07.
+# ---------------------------------------------------------------------------
+governanca/build/
+_site/
+
+# Pipeline do targets: o store é regenerável e grande
+_targets/
+!_targets.R
+
+# Dados intermediários e brutos grandes
+app/data/interim/
+app/data/raw/*.zip
+app/data/raw/*.7z
+app/data/raw/**/*.sav
+app/data/raw/**/*.dbf
+# exceção: arquivos pequenos e citáveis entram, declarados um a um
+!app/data/raw/**/*.md
+!app/data/raw/**/LEIAME.txt
+
+# Saídas pesadas do OSRM
+app/data/osrm/
+*.osm.pbf
+*.osrm*
+
+# ---------------------------------------------------------------------------
+# R
+# ---------------------------------------------------------------------------
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+.Renviron
+renv/library/
+renv/local/
+renv/cellar/
+renv/lock/
+renv/python/
+renv/staging/
+# renv.lock ENTRA no git — sem ele "rodar do zero" é falso
+
+# ---------------------------------------------------------------------------
+# Python
+# ---------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+# uv.lock ENTRA no git
+
+# ---------------------------------------------------------------------------
+# LaTeX / Quarto do relatório
+# ---------------------------------------------------------------------------
+relatorio/*.aux
+relatorio/*.log
+relatorio/*.out
+relatorio/*.toc
+relatorio/*.lof
+relatorio/*.lot
+relatorio/*.bbl
+relatorio/*.blg
+relatorio/*.fls
+relatorio/*.fdb_latexmk
+relatorio/*.synctex.gz
+.quarto/
+# o PDF final ENTRA — é entregável
+
+# ---------------------------------------------------------------------------
+# Sistema e editor
+# ---------------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*~
+
+# ---------------------------------------------------------------------------
+# Descarte temporário
+# ---------------------------------------------------------------------------
+_lixo/
+_scratch/

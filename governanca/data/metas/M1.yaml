@@ -1,0 +1,7 @@
+id: meta:M1
+kind: meta
+titulo: "Estimar a demanda paulistana capturável por mobilidade aérea urbana"
+status: aberta
+criado_em: 2026-08-24
+descricao: |
+  Partir da Pesquisa OD do Metrô e chegar a uma matriz de pares origem-destino elegíveis, com cada hipótese de recorte explícita, justificada em dado ou literatura, e registrada como decisão. É a primeira decisão difícil do projeto e o enunciado deliberadamente não sugere critérios.

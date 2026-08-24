@@ -1,0 +1,17 @@
+id: tarefa:T10.3
+kind: tarefa
+titulo: "Validar os fatores de expansão contra o relatório-síntese"
+status: backlog
+prazo: 2026-08-28
+prioridade: alta
+estimativa_h: 3
+criado_em: 2026-08-24
+arestas:
+  - {rel: REALIZA, dst: "meta:M1"}
+  - {rel: ATRIBUIDA_A, dst: "pessoa:pedro"}
+  - {rel: SUBTAREFA_DE, dst: "tarefa:T10"}
+  - {rel: DEPENDE_DE, dst: "tarefa:T10.1"}
+notas:
+  - data: 2026-08-24
+    autor: pedro
+    texto: "Alvo: reproduzir 42 mi de viagens/dia somando FE de viagem. Se não bater, o erro é de nível — provavelmente misturei FE de pessoa com FE de viagem."

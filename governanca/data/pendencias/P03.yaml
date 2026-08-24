@@ -1,0 +1,9 @@
+id: pendencia:P03
+kind: pendencia
+titulo: "Falta confirmar se o recorte municipal é aceito pelo professor"
+status: aberta
+criado_em: 2026-08-24
+descricao: |
+  O título do projeto diz cidade de São Paulo, mas a base OD é metropolitana. A decisão D1 assume o município. Perguntar no encontro de 26/08.
+arestas:
+  - {rel: BLOQUEIA, dst: "tarefa:T11"}

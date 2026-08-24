@@ -1,0 +1,17 @@
+id: tarefa:T33
+kind: tarefa
+titulo: "Levantar a curva de implantação e testar o formato em S"
+status: backlog
+prazo: 2026-09-14
+prioridade: alta
+estimativa_h: 6
+criado_em: 2026-08-24
+arestas:
+  - {rel: REALIZA, dst: "meta:M3"}
+  - {rel: ATRIBUIDA_A, dst: "pessoa:henri"}
+  - {rel: DEPENDE_DE, dst: "tarefa:T23"}
+  - {rel: DEPENDE_DE, dst: "tarefa:T25"}
+notas:
+  - data: 2026-08-24
+    autor: henri
+    texto: "Sobrepor a curva bilateral e a unilateral no mesmo dado. Se o S não aparecer, é achado — mostrar o que não funcionou é critério de excelência."

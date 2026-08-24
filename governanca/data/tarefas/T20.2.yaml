@@ -1,0 +1,13 @@
+id: tarefa:T20.2
+kind: tarefa
+titulo: "Cruzar o cadastro ANAC com o ROTAER do DECEA"
+status: backlog
+prazo: 2026-08-30
+prioridade: media
+estimativa_h: 4
+criado_em: 2026-08-24
+arestas:
+  - {rel: REALIZA, dst: "meta:M2"}
+  - {rel: ATRIBUIDA_A, dst: "pessoa:antonio"}
+  - {rel: SUBTAREFA_DE, dst: "tarefa:T20"}
+  - {rel: DEPENDE_DE, dst: "tarefa:T20.1"}

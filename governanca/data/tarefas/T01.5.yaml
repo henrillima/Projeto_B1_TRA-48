@@ -1,0 +1,13 @@
+id: tarefa:T01.5
+kind: tarefa
+titulo: "Gerar o site: grafo navegável e uma página por registro"
+status: backlog
+prazo: 2026-08-31
+prioridade: alta
+estimativa_h: 6
+criado_em: 2026-08-24
+arestas:
+  - {rel: REALIZA, dst: "meta:M4"}
+  - {rel: ATRIBUIDA_A, dst: "pessoa:henri"}
+  - {rel: SUBTAREFA_DE, dst: "tarefa:T01"}
+  - {rel: DEPENDE_DE, dst: "tarefa:T01.1"}

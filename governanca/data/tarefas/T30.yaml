@@ -1,0 +1,16 @@
+id: tarefa:T30
+kind: tarefa
+titulo: "Comparar relaxação desagregada e agregada"
+status: backlog
+prazo: 2026-09-12
+prioridade: alta
+estimativa_h: 5
+criado_em: 2026-08-24
+arestas:
+  - {rel: REALIZA, dst: "meta:M3"}
+  - {rel: ATRIBUIDA_A, dst: "pessoa:henri"}
+  - {rel: DEPENDE_DE, dst: "tarefa:T23"}
+notas:
+  - data: 2026-08-24
+    autor: henri
+    texto: "Discutir por que a bilateralidade quebra a quase-integralidade do MCLP: as duas restrições admitem y_j = y_k = 0,5."

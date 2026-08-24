@@ -1,0 +1,16 @@
+id: tarefa:T31
+kind: tarefa
+titulo: "Interpretar economicamente as variáveis duais"
+status: backlog
+prazo: 2026-09-12
+prioridade: alta
+estimativa_h: 5
+criado_em: 2026-08-24
+arestas:
+  - {rel: REALIZA, dst: "meta:M3"}
+  - {rel: ATRIBUIDA_A, dst: "pessoa:pedro"}
+  - {rel: DEPENDE_DE, dst: "tarefa:T23"}
+notas:
+  - data: 2026-08-24
+    autor: pedro
+    texto: "Ler em linguagem de decisão, não reportar números: pi é a inclinação da curva de implantação."

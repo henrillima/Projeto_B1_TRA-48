@@ -1,0 +1,17 @@
+id: decisao:D07
+kind: decisao
+titulo: "Manter a fonte de verdade em arquivos YAML versionados, com o banco como artefato de build"
+status: vigente
+criado_em: 2026-08-24
+descricao: |
+  Um arquivo por nó, em data/<tipo>/<id>.yaml. O banco .duckdb é gerado no CI e fica no .gitignore. Isso faz a granularidade do commit coincidir com a granularidade semântica: git log data/decisoes/ é literalmente o histórico de decisões, e git blame diz quem escreveu cada linha de justificativa. Dois integrantes editando entidades diferentes nunca conflitam. E torna a troca de banco uma reescrita de compilador, não uma migração de dados — o que neutraliza o risco de plataforma da D06.
+alternativas_descartadas:
+  - opcao: "Versionar o arquivo binário do banco"
+    por_que_nao: "Diff ilegível, merge impossível, e reconstruções produzem bytes diferentes mesmo sem mudança de dado. Commits de ruído binário destroem exatamente a auditabilidade que a métrica de cadência pretende medir."
+  - opcao: "Versionar um dump SQL textual"
+    por_que_nao: "Diff legível, mas ordenado por tabela e rowid: inserir uma linha no meio reordena e gera diff enorme. E o commit toca o arquivo de dados, não a decisão — perde-se a granularidade semântica."
+  - opcao: "Event sourcing puro (log append-only)"
+    por_que_nao: "Auditoria perfeita e merge quase sem conflito, mas consultar o estado exige replay, e corrigir um erro exige evento compensatório em vez de edição. Complexidade alta demais para o retorno. Adotamos só para as interações com IA, que são intrinsecamente eventos imutáveis."
+arestas:
+  - {rel: DECIDE_SOBRE, dst: "meta:M4"}
+  - {rel: ASSINADA_POR, dst: "pessoa:henri"}

@@ -1,0 +1,16 @@
+id: tarefa:T36
+kind: tarefa
+titulo: "Preparar a apresentação e a arguição"
+status: backlog
+prazo: 2026-09-23
+prioridade: alta
+estimativa_h: 6
+criado_em: 2026-08-24
+arestas:
+  - {rel: REALIZA, dst: "meta:M3"}
+  - {rel: ATRIBUIDA_A, dst: "pessoa:henri"}
+  - {rel: DEPENDE_DE, dst: "tarefa:T35"}
+notas:
+  - data: 2026-08-24
+    autor: henri
+    texto: "Pergunta garantida a todos os grupos: mostrem a decisão em que discordaram da IA e expliquem por que estavam certos. Preparar com registro real, não improviso."

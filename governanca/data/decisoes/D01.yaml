@@ -1,0 +1,17 @@
+id: decisao:D01
+kind: decisao
+titulo: "Recortar no município de São Paulo, com as zonas OD agregadas em macrozonas"
+status: vigente
+criado_em: 2026-08-24
+descricao: |
+  Modelar o município de São Paulo, não a RMSP inteira, com as zonas OD 2017 agregadas de 517 para aproximadamente 120 macrozonas. O título do projeto diz cidade de São Paulo, e a OD 2017 tem 342 das 517 zonas dentro do município. A agregação é exigência de tratabilidade (§4.5): formulação direta sobre a base completa não é resolvível. As camadas urbanísticas complementares do GeoSampa cobrem apenas a capital, então estender à RMSP sacrificaria qualidade de dado sem ganho de escopo.
+alternativas_descartadas:
+  - opcao: "RMSP completa, 39 municípios e 517 zonas"
+    por_que_nao: "Instância maior, dados urbanísticos incompletos fora da capital, e não é o recorte que o enunciado nomeia."
+  - opcao: "Recorte por subprefeituras"
+    por_que_nao: "A geografia não coincide com a das zonas OD; exigiria compatibilização areal, que introduz erro sem necessidade."
+  - opcao: "Só o quadrilátero central expandido"
+    por_que_nao: "Enviesaria o resultado para a conclusão que se quer testar — UAM como infraestrutura de elite — em vez de deixá-la emergir do modelo."
+arestas:
+  - {rel: DECIDE_SOBRE, dst: "meta:M1"}
+  - {rel: ASSINADA_POR, dst: "pessoa:pedro"}

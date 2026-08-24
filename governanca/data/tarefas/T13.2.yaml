@@ -1,0 +1,17 @@
+id: tarefa:T13.2
+kind: tarefa
+titulo: "Calibrar o fator de congestionamento por amostra de pico"
+status: backlog
+prazo: 2026-09-02
+prioridade: media
+estimativa_h: 4
+criado_em: 2026-08-24
+arestas:
+  - {rel: REALIZA, dst: "meta:M1"}
+  - {rel: ATRIBUIDA_A, dst: "pessoa:antonio"}
+  - {rel: SUBTAREFA_DE, dst: "tarefa:T13"}
+  - {rel: DEPENDE_DE, dst: "tarefa:T13.1"}
+notas:
+  - data: 2026-08-24
+    autor: antonio
+    texto: "OSRM roteia em free-flow e subestima o pico, que é justamente quando o eVTOL ganha. Cruzar com a duração declarada na própria OD."

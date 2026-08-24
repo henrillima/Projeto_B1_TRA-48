@@ -1,0 +1,12 @@
+id: tarefa:T10.2
+kind: tarefa
+titulo: "Verificar se os anexos da OD 2023 contêm microdados"
+status: backlog
+prazo: 2026-08-26
+prioridade: alta
+estimativa_h: 1
+criado_em: 2026-08-24
+arestas:
+  - {rel: REALIZA, dst: "meta:M1"}
+  - {rel: ATRIBUIDA_A, dst: "pessoa:pedro"}
+  - {rel: SUBTAREFA_DE, dst: "tarefa:T10"}

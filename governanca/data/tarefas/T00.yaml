@@ -1,0 +1,15 @@
+id: tarefa:T00
+kind: tarefa
+titulo: "Definir o esquema do grafo de governança"
+status: fazendo
+prazo: 2026-08-25
+prioridade: alta
+estimativa_h: 4
+criado_em: 2026-08-24
+arestas:
+  - {rel: REALIZA, dst: "meta:M4"}
+  - {rel: ATRIBUIDA_A, dst: "pessoa:henri"}
+notas:
+  - data: 2026-08-24
+    autor: henri
+    texto: "Esquema derivado das quatro perguntas do §5.4 do enunciado. Se uma pergunta não tem consulta, o nó correspondente não deve existir."

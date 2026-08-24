@@ -1,0 +1,16 @@
+id: tarefa:T20.1
+kind: tarefa
+titulo: "Extrair helipontos da lista ANAC filtrada por município"
+status: backlog
+prazo: 2026-08-27
+prioridade: alta
+estimativa_h: 3
+criado_em: 2026-08-24
+arestas:
+  - {rel: REALIZA, dst: "meta:M2"}
+  - {rel: ATRIBUIDA_A, dst: "pessoa:antonio"}
+  - {rel: SUBTAREFA_DE, dst: "tarefa:T20"}
+notas:
+  - data: 2026-08-24
+    autor: antonio
+    texto: "Contar nós mesmos e registrar a data de extração. Coordenadas provavelmente em DMS — validar cabeçalho antes de escrever o parser."

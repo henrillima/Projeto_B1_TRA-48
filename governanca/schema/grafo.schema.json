@@ -1,0 +1,174 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/henrillima/Projeto_B1_TRA-48/schema/grafo.schema.json",
+  "title": "Grafo de governança — Projeto B1, TRA-48",
+  "description": "Esquema de validação de um nó do grafo de governança. Cada arquivo em data/<tipo>/<id>.yaml deve validar contra este schema. O CI falha se algum não validar.",
+
+  "type": "object",
+  "required": ["id", "kind", "titulo"],
+  "additionalProperties": false,
+
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^(meta|tarefa|decisao|pendencia|fonte|arquivo|referencia|experimento|ia|conclusao|pessoa):[A-Za-z0-9._-]+$",
+      "description": "Identificador estável e global. Prefixo = kind. Nunca muda depois de criado — outros nós apontam para ele."
+    },
+
+    "kind": {
+      "enum": ["meta", "tarefa", "decisao", "pendencia", "fonte", "arquivo",
+               "referencia", "experimento", "ia", "conclusao", "pessoa"],
+      "description": "Rótulo do nó. Determina quais propriedades e arestas fazem sentido."
+    },
+
+    "titulo": {
+      "type": "string",
+      "minLength": 4,
+      "maxLength": 160,
+      "description": "Uma linha. É o que aparece no nó do grafo e na coluna do kanban."
+    },
+
+    "descricao": {
+      "type": "string",
+      "description": "Texto livre em Markdown. Opcional para tarefa, obrigatório de fato para decisao."
+    },
+
+    "criado_em": {
+      "type": "string",
+      "format": "date",
+      "description": "Data de criação do registro. Alimenta a métrica de cadência."
+    },
+
+    "arestas": {
+      "type": "array",
+      "description": "Relações que SAEM deste nó. Toda aresta é declarada uma vez só, e do lado que MUDA: por isso ATRIBUIDA_A vai de tarefa para pessoa, e não o contrário — assim o arquivo da pessoa fica estável e não vira ponto de conflito de merge.",
+      "items": {
+        "type": "object",
+        "required": ["rel", "dst"],
+        "additionalProperties": false,
+        "properties": {
+          "rel": {
+            "enum": [
+              "REALIZA", "SUBTAREFA_DE", "DEPENDE_DE",
+              "ATRIBUIDA_A", "ASSINADA_POR",
+              "BLOQUEIA", "DECIDE_SOBRE", "SUPERSEDE",
+              "JUSTIFICADA_POR", "ORIGINA_DE",
+              "USA", "PRODUZ", "EXECUTA", "CITA", "SUSTENTA"
+            ],
+            "description": "Tipo da relação. Enum fechado de propósito: erro de digitação em rel vira aresta fantasma que o grafo aceita e ninguém encontra."
+          },
+          "dst": {
+            "type": "string",
+            "pattern": "^(meta|tarefa|decisao|pendencia|fonte|arquivo|referencia|experimento|ia|conclusao|pessoa):[A-Za-z0-9._-]+$",
+            "description": "Id do nó de destino. check_integrity.py falha o build se este id não existir."
+          },
+          "nota": {
+            "type": "string",
+            "description": "Qualificador opcional da aresta — por que esta relação existe."
+          }
+        }
+      }
+    },
+
+    "notas": {
+      "type": "array",
+      "description": "Observações datadas e assinadas. Append-only: nunca se edita ou apaga uma nota antiga; acrescenta-se outra. Não é nó porque nenhuma nota é referenciada de fora — mas é consultável via UNNEST no DuckDB.",
+      "items": {
+        "type": "object",
+        "required": ["data", "autor", "texto"],
+        "additionalProperties": false,
+        "properties": {
+          "data": { "type": "string", "format": "date" },
+          "autor": { "enum": ["henri", "pedro", "antonio"] },
+          "texto": { "type": "string", "minLength": 3 }
+        }
+      }
+    },
+
+    "status": {
+      "type": "string",
+      "description": "Estado do nó. O conjunto válido depende do kind — ver allOf abaixo."
+    },
+
+    "prazo":       { "type": "string", "format": "date" },
+    "estimativa_h":{ "type": "number", "minimum": 0.25, "maximum": 40 },
+    "prioridade":  { "enum": ["alta", "media", "baixa"] },
+
+    "alternativas_descartadas": {
+      "type": "array",
+      "description": "Obrigatório em decisao. O enunciado exige justificativa E alternativas descartadas (§5.3).",
+      "items": {
+        "type": "object",
+        "required": ["opcao", "por_que_nao"],
+        "additionalProperties": false,
+        "properties": {
+          "opcao":       { "type": "string" },
+          "por_que_nao": { "type": "string" }
+        }
+      }
+    },
+
+    "origem":      { "type": "string", "description": "fonte: órgão e URL de onde o dado vem." },
+    "formato":     { "type": "string", "description": "fonte: .csv, .sav, SHP, PDF..." },
+    "cobertura":   { "type": "string", "description": "fonte: recorte espacial e temporal." },
+    "limitacoes":  { "type": "string", "description": "fonte: obrigatório. Reconhecer a limitação vale mais que apresentar o dado sem ressalva (§3.2)." },
+
+    "aceito":      { "enum": ["integral", "parcial", "descartado"], "description": "ia: grau de aceite da sugestão." },
+    "critica_humana": {
+      "type": "string",
+      "minLength": 20,
+      "description": "ia: OBRIGATÓRIO. O que estava errado, incompleto ou discutível na resposta. Sem isto o registro não existe (§5.6)."
+    },
+
+    "parametros":  { "type": "object", "description": "experimento: parâmetros da rodada." },
+    "obj":         { "type": "number", "description": "experimento: valor da função objetivo." },
+    "gap":         { "type": "number", "description": "experimento: gap de otimalidade." },
+    "segundos":    { "type": "number", "description": "experimento: tempo de solução." },
+    "commit":      { "type": "string", "pattern": "^[0-9a-f]{7,40}$", "description": "experimento: sha do commit que produziu a rodada." },
+
+    "caminho":     { "type": "string", "description": "arquivo: caminho relativo no repositório." },
+    "sha256":      { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+
+    "secao":       { "type": "string", "description": "conclusao: seção do relatório onde a afirmação aparece." },
+    "papel":       { "type": "string", "description": "pessoa: frente principal." },
+    "github":      { "type": "string", "description": "pessoa: usuário GitHub, para casar registros com commits." }
+  },
+
+  "allOf": [
+    {
+      "if":   { "properties": { "kind": { "const": "tarefa" } }, "required": ["kind"] },
+      "then": {
+        "required": ["status", "arestas"],
+        "properties": {
+          "status": {
+            "enum": ["backlog", "pronta", "fazendo", "revisao", "feita"],
+            "description": "Colunas do kanban. NÃO existe 'bloqueada': bloqueio é DERIVADO de uma pendencia aberta apontando para esta tarefa. Estado duplicado envelhece e mente."
+          }
+        }
+      }
+    },
+    {
+      "if":   { "properties": { "kind": { "const": "meta" } }, "required": ["kind"] },
+      "then": { "properties": { "status": { "enum": ["aberta", "atingida", "abandonada"] } } }
+    },
+    {
+      "if":   { "properties": { "kind": { "const": "decisao" } }, "required": ["kind"] },
+      "then": {
+        "required": ["descricao", "alternativas_descartadas", "status"],
+        "properties": { "status": { "enum": ["vigente", "superada", "provisoria"] } }
+      }
+    },
+    {
+      "if":   { "properties": { "kind": { "const": "pendencia" } }, "required": ["kind"] },
+      "then": { "properties": { "status": { "enum": ["aberta", "fechada"] } }, "required": ["status"] }
+    },
+    {
+      "if":   { "properties": { "kind": { "const": "fonte" } }, "required": ["kind"] },
+      "then": { "required": ["origem", "limitacoes"] }
+    },
+    {
+      "if":   { "properties": { "kind": { "const": "ia" } }, "required": ["kind"] },
+      "then": { "required": ["aceito", "critica_humana"] }
+    }
+  ]
+}

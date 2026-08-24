@@ -1,0 +1,9 @@
+id: pendencia:P01
+kind: pendencia
+titulo: "Não se sabe se os microdados da OD 2023 foram publicados"
+status: aberta
+criado_em: 2026-08-24
+descricao: |
+  Só relatório-síntese e um ZIP de anexos foram identificados. Se não houver microdados, a decisão D2 (base de demanda) se confirma; se houver, ela muda inteiramente. Abrir pedido e-SIC ao Metrô-SP esta semana, porque o prazo da LAI só cabe no cronograma se pedido agora.
+arestas:
+  - {rel: BLOQUEIA, dst: "tarefa:T12"}

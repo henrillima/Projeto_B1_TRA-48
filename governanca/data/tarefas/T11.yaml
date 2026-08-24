@@ -1,0 +1,16 @@
+id: tarefa:T11
+kind: tarefa
+titulo: "Agregar as 517 zonas OD em macrozonas"
+status: backlog
+prazo: 2026-08-30
+prioridade: alta
+estimativa_h: 6
+criado_em: 2026-08-24
+arestas:
+  - {rel: REALIZA, dst: "meta:M1"}
+  - {rel: ATRIBUIDA_A, dst: "pessoa:pedro"}
+  - {rel: DEPENDE_DE, dst: "tarefa:T10.3"}
+notas:
+  - data: 2026-08-24
+    autor: pedro
+    texto: "O critério de agregação é sub-decisão e vai ser perguntado: contiguidade, similaridade de fluxo ou distrito?"

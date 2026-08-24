@@ -1,0 +1,10 @@
+id: tarefa:T10
+kind: tarefa
+titulo: "Obter, ler e validar a Pesquisa Origem-Destino"
+status: backlog
+prazo: 2026-08-28
+prioridade: alta
+criado_em: 2026-08-24
+arestas:
+  - {rel: REALIZA, dst: "meta:M1"}
+  - {rel: ATRIBUIDA_A, dst: "pessoa:pedro"}

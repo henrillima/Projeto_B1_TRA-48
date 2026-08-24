@@ -1,0 +1,7 @@
+id: meta:M4
+kind: meta
+titulo: "Manter o projeto integralmente rastreável, auditável e reprodutível"
+status: aberta
+criado_em: 2026-08-24
+descricao: |
+  A Camada B. Toda decisão ligada a uma meta, todo resultado a um experimento, todo arquivo a uma decisão, zero nós órfãos. Esta meta existe para que as tarefas de governança tenham a que se vincular — sem ela, o próprio trabalho de rastreabilidade seria órfão no grafo.

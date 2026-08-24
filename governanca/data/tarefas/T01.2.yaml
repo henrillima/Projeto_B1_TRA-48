@@ -1,0 +1,17 @@
+id: tarefa:T01.2
+kind: tarefa
+titulo: "Escrever o validador de schema e o checador de integridade"
+status: backlog
+prazo: 2026-08-27
+prioridade: alta
+estimativa_h: 3
+criado_em: 2026-08-24
+arestas:
+  - {rel: REALIZA, dst: "meta:M4"}
+  - {rel: ATRIBUIDA_A, dst: "pessoa:henri"}
+  - {rel: SUBTAREFA_DE, dst: "tarefa:T01"}
+  - {rel: DEPENDE_DE, dst: "tarefa:T00"}
+notas:
+  - data: 2026-08-24
+    autor: henri
+    texto: "É o que separa 'banco de governança computável' de 'pasta de YAML'. Aresta órfã e ciclo em BLOQUEIA devem falhar o CI."

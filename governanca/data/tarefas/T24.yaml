@@ -1,0 +1,16 @@
+id: tarefa:T24
+kind: tarefa
+titulo: "Validar o modelo com instância-brinquedo resolvida à mão"
+status: backlog
+prazo: 2026-09-08
+prioridade: alta
+estimativa_h: 4
+criado_em: 2026-08-24
+arestas:
+  - {rel: REALIZA, dst: "meta:M2"}
+  - {rel: ATRIBUIDA_A, dst: "pessoa:pedro"}
+  - {rel: DEPENDE_DE, dst: "tarefa:T21"}
+notas:
+  - data: 2026-08-24
+    autor: pedro
+    texto: "5 zonas, 3 candidatos, ótimo conhecido. Modelo que roda mas está errado é pior que modelo que não roda."

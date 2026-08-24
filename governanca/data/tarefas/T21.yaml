@@ -1,0 +1,17 @@
+id: tarefa:T21
+kind: tarefa
+titulo: "Escrever a formulação completa em notação matemática"
+status: backlog
+prazo: 2026-09-02
+prioridade: alta
+estimativa_h: 8
+criado_em: 2026-08-24
+arestas:
+  - {rel: REALIZA, dst: "meta:M2"}
+  - {rel: ATRIBUIDA_A, dst: "pessoa:henri"}
+  - {rel: DEPENDE_DE, dst: "tarefa:T12"}
+  - {rel: DEPENDE_DE, dst: "tarefa:T20"}
+notas:
+  - data: 2026-08-24
+    autor: henri
+    texto: "Cada parâmetro com unidade e procedência; cada restrição com a razão de existir. É exigência textual do §4.2."

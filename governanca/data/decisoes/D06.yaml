@@ -1,0 +1,21 @@
+id: decisao:D06
+kind: decisao
+titulo: "Emular o grafo sobre tabelas relacionais em DuckDB, em vez de adotar um banco de grafo nativo"
+status: vigente
+criado_em: 2026-08-24
+descricao: |
+  Duas tabelas — node(id, kind, titulo, status, props) e edge(src, dst, rel, props) — consultadas com SQL e WITH RECURSIVE. DuckDB é MIT, embarcado, arquivo único, roda em GitHub Actions sem serviço, tem binding excelente em R e em Python, e desde a v1.3 tem USING KEY, que torna travessia recursiva viável sem estourar memória em grafo cíclico. O mesmo banco também serve as consultas analíticas do projeto (cadência de commits, agregações), o que um banco de grafo puro não faria bem.
+alternativas_descartadas:
+  - opcao: "Kùzu (property graph embarcado, Cypher)"
+    por_que_nao: "O repositório foi arquivado em 10/10/2025 e a empresa foi adquirida pela Apple. Adotar um projeto morto no meio de um semestre é risco sem contrapartida."
+  - opcao: "LadybugDB (fork comunitário do Kùzu)"
+    por_que_nao: "Tecnicamente atraente e ativo, mas está em v0.17, pré-1.0, com dez meses de idade e sem binding em R. Não é a escolha conservadora para uma disciplina de cinco semanas."
+  - opcao: "Neo4j Community"
+    por_que_nao: "Modelo servidor, JVM, GPLv3. Estruturalmente incompatível com fonte de verdade em git e publicação estática: acaba-se com um banco vivo em algum lugar que diverge do repositório — exatamente o que o projeto existe para evitar."
+  - opcao: "RDF com Oxigraph ou Jena"
+    por_que_nao: "N-Triples é o formato mais amigável a git que existe, e PROV-O modelaria proveniência de graça. Mas o custo cognitivo de IRIs, ontologias e open-world assumption cai inteiro sobre o grupo, e a visualização é pior. Fica como formato de exportação opcional, não como fonte de verdade."
+  - opcao: "DuckPGQ (extensão SQL/PGQ sobre DuckDB)"
+    por_que_nao: "O próprio README declara ser projeto de pesquisa em andamento. Pode ser usado como camada opcional de análise sobre as mesmas tabelas, mas a fonte de verdade não pode depender dele."
+arestas:
+  - {rel: DECIDE_SOBRE, dst: "meta:M4"}
+  - {rel: ASSINADA_POR, dst: "pessoa:henri"}

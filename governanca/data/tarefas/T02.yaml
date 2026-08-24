@@ -1,0 +1,12 @@
+id: tarefa:T02
+kind: tarefa
+titulo: "Registrar metas, decisões de recorte e fontes no banco"
+status: backlog
+prazo: 2026-08-25
+prioridade: alta
+estimativa_h: 3
+criado_em: 2026-08-24
+arestas:
+  - {rel: REALIZA, dst: "meta:M4"}
+  - {rel: ATRIBUIDA_A, dst: "pessoa:pedro"}
+  - {rel: DEPENDE_DE, dst: "tarefa:T00"}

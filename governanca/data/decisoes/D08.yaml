@@ -1,0 +1,15 @@
+id: decisao:D08
+kind: decisao
+titulo: "Escrita no grafo apenas por CLI e commit; o acesso da IA é estritamente de leitura"
+status: vigente
+criado_em: 2026-08-24
+descricao: |
+  O servidor MCP abre o banco com read_only=True, não declara nenhuma tool de escrita, e roda com usuário sem permissão de escrita em build/ — defesa em três camadas. A IA propõe o comando; um humano executa e commita. Isso não é preciosismo: é consequência da D07. Se a IA escrevesse no banco, a escrita seria destruída no próximo build. E toda mutação passando por commit é o que dá proveniência a cada mudança — sem isso, o grafo perde a capacidade de responder quem decidiu e quando, que é a razão de ele existir.
+alternativas_descartadas:
+  - opcao: "MCP com tool de escrita"
+    por_que_nao: "Escrita sem commit é trabalho invisível para a métrica de cadência, contorna a validação de schema, e abre superfície para prompt injection: o grafo contém texto de terceiros (referências, transcrições), e texto malicioso lido pelo modelo poderia induzir escrita."
+  - opcao: "IA edita os YAML diretamente pelo sistema de arquivos"
+    por_que_nao: "Aceitável e é o que fazemos na prática em sessão assistida — mas o commit continua sendo humano e assinado. O que se veda é escrita fora de banda, sem passar por revisão e por git."
+arestas:
+  - {rel: DECIDE_SOBRE, dst: "meta:M4"}
+  - {rel: ASSINADA_POR, dst: "pessoa:henri"}

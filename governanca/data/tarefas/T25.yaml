@@ -1,0 +1,12 @@
+id: tarefa:T25
+kind: tarefa
+titulo: "Implementar o baseline CFLP unilateral no mesmo dado"
+status: backlog
+prazo: 2026-09-09
+prioridade: media
+estimativa_h: 6
+criado_em: 2026-08-24
+arestas:
+  - {rel: REALIZA, dst: "meta:M2"}
+  - {rel: ATRIBUIDA_A, dst: "pessoa:antonio"}
+  - {rel: DEPENDE_DE, dst: "tarefa:T22"}

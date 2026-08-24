@@ -1,0 +1,13 @@
+id: tarefa:T20.3
+kind: tarefa
+titulo: "Filtrar candidatos por viabilidade urbanística"
+status: backlog
+prazo: 2026-09-02
+prioridade: media
+estimativa_h: 5
+criado_em: 2026-08-24
+arestas:
+  - {rel: REALIZA, dst: "meta:M2"}
+  - {rel: ATRIBUIDA_A, dst: "pessoa:antonio"}
+  - {rel: SUBTAREFA_DE, dst: "tarefa:T20"}
+  - {rel: DEPENDE_DE, dst: "tarefa:T20.2"}

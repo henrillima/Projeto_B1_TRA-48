@@ -1,0 +1,19 @@
+id: decisao:D04
+kind: decisao
+titulo: "Usar os helipontos existentes como base do conjunto de candidatos"
+status: vigente
+criado_em: 2026-08-24
+descricao: |
+  O conjunto J parte dos helipontos cadastrados na cidade de São Paulo, extraídos da lista de aeródromos privados da ANAC e cruzados com o ROTAER do DECEA, filtrados por viabilidade urbanística com camadas do GeoSampa, mais alguns sítios adicionais identificados por análise espacial. São Paulo é o caso em que essa decisão é mais defensável no mundo, porque a infraestrutura já está fisicamente construída — o que remove a maior fonte de arbitrariedade dos trabalhos de Chicago, Munique e Pequim. Alvo de dimensionamento: entre 40 e 60 candidatos, porque são as variáveis binárias e é isso que determina se o branch-and-bound termina.
+alternativas_descartadas:
+  - opcao: "Grade regular sobre a cidade"
+    por_que_nao: "Ignora que a infraestrutura já existe e que o licenciamento em São Paulo é restritivo."
+  - opcao: "k-means ou fuzzy c-means sobre a demanda"
+    por_que_nao: "Gera candidatos onde há demanda, o que circularmente garante boa cobertura e esvazia o problema de localização."
+  - opcao: "Só os grandes aeroportos, CGH, GRU e VCP"
+    por_que_nao: "Vira problema de acesso aeroportuário, não de rede urbana. Fica como o baseline unilateral de comparação."
+  - opcao: "Excluir helipontos ausentes do cadastro municipal"
+    por_que_nao: "Filtraria justamente os mais consolidados: helipontos aprovados antes de 23/10/2009 só entram no registro da Prefeitura na renovação da licença. Ausência no cadastro é limitação da fonte, não evidência de inexistência."
+arestas:
+  - {rel: DECIDE_SOBRE, dst: "meta:M2"}
+  - {rel: ASSINADA_POR, dst: "pessoa:antonio"}

@@ -1,0 +1,15 @@
+id: tarefa:T01
+kind: tarefa
+titulo: "Construir a infraestrutura do banco de governança"
+status: backlog
+prazo: 2026-08-31
+prioridade: alta
+criado_em: 2026-08-24
+arestas:
+  - {rel: REALIZA, dst: "meta:M4"}
+  - {rel: ATRIBUIDA_A, dst: "pessoa:henri"}
+  - {rel: DEPENDE_DE, dst: "tarefa:T00"}
+notas:
+  - data: 2026-08-24
+    autor: henri
+    texto: "Não vamos receber repositório-modelo. Construímos do zero — registrar isso como decisão."

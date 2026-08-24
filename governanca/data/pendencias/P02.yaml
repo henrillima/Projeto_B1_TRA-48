@@ -1,0 +1,9 @@
+id: pendencia:P02
+kind: pendencia
+titulo: "Quatro referências centrais estão em paywall"
+status: aberta
+criado_em: 2026-08-24
+descricao: |
+  Carvalho et al. (2026), Ribeiro et al. (2023), Brunelli et al. (2023) e Shin et al. (2021) foram confirmados apenas em metadado bibliográfico. Citar formulação que ninguém leu é o palpite acelerado que o §1.2 condena. Obter os PDFs pela biblioteca do ITA.
+arestas:
+  - {rel: BLOQUEIA, dst: "tarefa:T21"}

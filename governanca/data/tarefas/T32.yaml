@@ -1,0 +1,12 @@
+id: tarefa:T32
+kind: tarefa
+titulo: "Rodar a análise de sensibilidade nos limiares"
+status: backlog
+prazo: 2026-09-14
+prioridade: alta
+estimativa_h: 6
+criado_em: 2026-08-24
+arestas:
+  - {rel: REALIZA, dst: "meta:M3"}
+  - {rel: ATRIBUIDA_A, dst: "pessoa:antonio"}
+  - {rel: DEPENDE_DE, dst: "tarefa:T23"}

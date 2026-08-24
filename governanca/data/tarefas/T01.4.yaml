@@ -1,0 +1,17 @@
+id: tarefa:T01.4
+kind: tarefa
+titulo: "Escrever o servidor MCP estritamente read-only"
+status: backlog
+prazo: 2026-08-30
+prioridade: media
+estimativa_h: 4
+criado_em: 2026-08-24
+arestas:
+  - {rel: REALIZA, dst: "meta:M4"}
+  - {rel: ATRIBUIDA_A, dst: "pessoa:henri"}
+  - {rel: SUBTAREFA_DE, dst: "tarefa:T01"}
+  - {rel: DEPENDE_DE, dst: "tarefa:T01.1"}
+notas:
+  - data: 2026-08-24
+    autor: henri
+    texto: "read_only=True no engine, sem tool de escrita declarada, processo sem permissão de escrita em build/. Três camadas."

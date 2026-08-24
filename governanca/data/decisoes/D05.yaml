@@ -1,0 +1,19 @@
+id: decisao:D05
+kind: decisao
+titulo: "Adotar um MCLP de fluxo bilateral porta a porta como formulação principal"
+status: vigente
+criado_em: 2026-08-24
+descricao: |
+  MILP híbrido de cobertura máxima, interceptação de fluxo e p-hub mediana, em que a unidade de cobertura é o par origem-destino, atendido apenas se houver vertiporto na origem e no destino. Critério de otimalidade: maximizar economia de tempo-passageiro por dia, em pax·min/dia. É a única formulação viável em cinco semanas que enfrenta as três exigências do §4.3 — porta a porta, interdependência entre localizações e massa crítica de rede — sem sair do MILP exato, preservando relaxação linear, duais e sensibilidade, que são o vínculo obrigatório com o bimestre de Programação Linear.
+alternativas_descartadas:
+  - opcao: "p-mediana ou MCLP clássico"
+    por_que_nao: "Cobertura unilateral: basta um vertiporto perto da origem. Falha central no caso de vertiportos, porque a viagem exige os dois lados."
+  - opcao: "p-hub mediana clássico de O'Kelly (1987)"
+    por_que_nao: "Captura interdependência, mas assume demanda inelástica e integralmente roteada pela rede, e o desconto inter-hub pressupõe economia de escala que não existe em eVTOL: o custo por assento-km é maior, não menor, e o ganho real é em tempo."
+  - opcao: "Hub location com logit endógeno (Rath e Chow, 2022; Hagspihl et al., 2025)"
+    por_que_nao: "Tecnicamente superior, mas depende de calibração comportamental brasileira inexistente. Fica como extensão opcional da semana 4."
+  - opcao: "Meta-heurística, GA ou NSGA-III"
+    por_que_nao: "Resolveria instâncias maiores, mas destrói exatamente as análises que a disciplina exige: relaxação linear e leitura de duais."
+arestas:
+  - {rel: DECIDE_SOBRE, dst: "meta:M2"}
+  - {rel: ASSINADA_POR, dst: "pessoa:henri"}

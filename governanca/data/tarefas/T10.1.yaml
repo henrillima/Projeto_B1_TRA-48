@@ -1,0 +1,16 @@
+id: tarefa:T10.1
+kind: tarefa
+titulo: "Baixar OD-2017.zip e extrair o layout de variáveis"
+status: backlog
+prazo: 2026-08-25
+prioridade: alta
+estimativa_h: 2
+criado_em: 2026-08-24
+arestas:
+  - {rel: REALIZA, dst: "meta:M1"}
+  - {rel: ATRIBUIDA_A, dst: "pessoa:pedro"}
+  - {rel: SUBTAREFA_DE, dst: "tarefa:T10"}
+notas:
+  - data: 2026-08-24
+    autor: pedro
+    texto: "Resolve de uma vez os nomes de variável que ninguém confirmou. Atalho: odbr::read_dictionary()."

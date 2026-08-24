@@ -1,0 +1,12 @@
+id: tarefa:T35
+kind: tarefa
+titulo: "Redigir o relatório de engenharia"
+status: backlog
+prazo: 2026-09-22
+prioridade: alta
+estimativa_h: 16
+criado_em: 2026-08-24
+arestas:
+  - {rel: REALIZA, dst: "meta:M3"}
+  - {rel: ATRIBUIDA_A, dst: "pessoa:pedro"}
+  - {rel: DEPENDE_DE, dst: "tarefa:T33"}
