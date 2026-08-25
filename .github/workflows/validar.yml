@@ -19,11 +19,15 @@ jobs:
   validar:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v4
 
-      - uses: astral-sh/setup-uv@v9
-        with:
-          enable-cache: true
+      - name: Instalar uv
+        # Sem action de terceiro aqui, deliberadamente. A primeira versao deste
+        # workflow usava `astral-sh/setup-uv@v9`, que nao existe — a major foi
+        # tirada de um resumo de pagina em vez da fonte, e o job morreu em 12s
+        # com "unable to resolve action". `pip install uv` nao tem major para
+        # errar: o Python ja vem no runner.
+        run: pip install uv
 
       - name: Schema e integridade
         run: |

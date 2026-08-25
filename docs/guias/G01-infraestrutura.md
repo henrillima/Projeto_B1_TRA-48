@@ -1385,13 +1385,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0        # a métrica de cadência lê `git log`; raso mentiria
 
-      - uses: astral-sh/setup-uv@v9
-        with:
-          enable-cache: true
+      - name: Instalar uv
+        run: pip install uv
 
       - name: Validar o grafo
         run: |
@@ -1411,7 +1410,7 @@ jobs:
             --db governanca/build/grafo.duckdb --out _site/
 
       - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v5
+      - uses: actions/upload-pages-artifact@v3
         with:
           path: _site/
 
@@ -1451,13 +1450,12 @@ jobs:
   grafo:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0      # checar_notas_append_only compara com origin/main
 
-      - uses: astral-sh/setup-uv@v9
-        with:
-          enable-cache: true
+      - name: Instalar uv
+        run: pip install uv
 
       - name: Validar o grafo
         run: |
@@ -1482,11 +1480,22 @@ jobs:
 Depois de o workflow rodar uma vez: Settings → Branches → regra em `main` → **Require status
 checks to pass** → marque `grafo`. Antes da primeira execução o check nem aparece na lista.
 
-> **Majors conferidas em 24/08/2026**, na página de releases de cada action:
-> `checkout@v6`, `setup-uv@v9`, `configure-pages@v5`, `upload-pages-artifact@v5`,
-> `deploy-pages@v5`. São essas que estão nos workflows commitados. Reconfira antes de
-> qualquer alteração no CI — action desatualizada falha com aviso de depreciação que ninguém
-> lê até o dia da entrega.
+> **Versões: leia da fonte que a própria GitHub mantém**, não de uma página de releases
+> resumida. O arquivo de referência é
+> `https://raw.githubusercontent.com/actions/starter-workflows/main/pages/static.yml`,
+> de onde saem `checkout@v4`, `configure-pages@v5`, `upload-pages-artifact@v3` e
+> `deploy-pages@v5` — exatamente o que está nos workflows commitados.
+>
+> **Como este parágrafo já esteve errado.** A primeira versão dizia `setup-uv@v9` e
+> `upload-pages-artifact@v5`, majors que não existem. Elas vieram de um resumo automático da
+> página de releases, e as datas no resumo eram inconsistentes — `checkout v6.0.3` datado de
+> junho de 2024 não fecha com nada — mas ninguém olhou. O job morreu em 12 segundos com
+> `unable to resolve action`. A lição não é "confira versão": é que **um resumo de página não
+> é a fonte**, e o sintoma de que ele não é foi visível antes do erro. Registrado como
+> `#discordancia` na interação de IA da infraestrutura.
+>
+> E a conclusão de engenharia foi eliminar a classe do problema: `setup-uv` saiu e virou
+> `pip install uv` num passo `run:`. Action de terceiro tem major para errar; `pip` não.
 
 ---
 

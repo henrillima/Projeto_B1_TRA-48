@@ -30,7 +30,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v4
         with:
           # fetch-depth: 0 é obrigatório aqui. O site publica a cadência de
           # commits por semana, lida do git log — com histórico raso o gráfico
@@ -38,9 +38,12 @@ jobs:
           fetch-depth: 0
 
       - name: Instalar uv
-        uses: astral-sh/setup-uv@v9
-        with:
-          enable-cache: true
+        # Sem action de terceiro aqui, deliberadamente. A primeira versao deste
+        # workflow usava `astral-sh/setup-uv@v9`, que nao existe — a major foi
+        # tirada de um resumo de pagina em vez da fonte, e o job morreu em 12s
+        # com "unable to resolve action". `pip install uv` nao tem major para
+        # errar: o Python ja vem no runner.
+        run: pip install uv
 
       - name: Validar o grafo
         # Roda antes de qualquer coisa. Compilar um grafo quebrado produziria um
@@ -66,7 +69,7 @@ jobs:
 
       - uses: actions/configure-pages@v5
 
-      - uses: actions/upload-pages-artifact@v5
+      - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
 
